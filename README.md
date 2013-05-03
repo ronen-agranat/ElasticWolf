@@ -79,6 +79,14 @@ clients for accessing Linux instances.
      * sudo wget -O- https://ftp.mozilla.org/pub/mozilla.org/xulrunner/releases/13.0/runtimes/xulrunner-13.0.en-US.linux-`uname -p`.tar.bz2 | tar -xj
      * sudo ln -s /opt/xulrunner/xulrunner /usr/bin/xulrunner
 
+## Testing on Firefox
+
+    * [Create a Firefox profile](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Setting_Up_a_Development_Environment#Firefox_profile_management)
+
+    * Set the $ELASTICWOLF\_FIREFOX\_PROFILE\_DIR environment variable to point to your Firefox profile directory
+
+    * make install
+
 ## Building Releases
 
  Releases must be built on a Mac and cannot be built on Windows.  To create binary packages
