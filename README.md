@@ -81,11 +81,11 @@ clients for accessing Linux instances.
 
 ## Testing on Firefox
 
-    * [Create a Firefox profile](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Setting_Up_a_Development_Environment#Firefox_profile_management)
+   * [Create a Firefox profile](https://developer.mozilla.org/en-US/docs/XUL/School_tutorial/Setting_Up_a_Development_Environment#Firefox_profile_management)
 
-    * Set the $ELASTICWOLF\_FIREFOX\_PROFILE\_DIR environment variable to point to your Firefox profile directory
+   * Set the $ELASTICWOLF\_FIREFOX\_PROFILE\_DIR environment variable to point to your Firefox profile directory
 
-    * make install
+   * make install
 
 ## Building Releases
 
