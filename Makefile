@@ -25,11 +25,15 @@ files_to_exclude_from_xpi := '*/xulrunner/**' \
 	'*/bin/' \
 	'*/bin/**' \
 	'*/etc/' \
-	'*/etc/**' \
-	'**/prefs.js'
+	'*/etc/**'
 
 # Path to installed Firefox extension
 profile_xpi_file := $(ELASTICWOLF_FIREFOX_PROFILE_DIR)/extensions/{2564a6b0-73ab-11e0-a1f0-0800200c9a66}.xpi
+
+# Preference files
+preferences_xulrunner := preferences/xulrunner.js
+preferences_firefox := preferences/firefox.js
+preferences := ElasticWolf/defaults/preferences/prefs.js 
 
 all:
 
@@ -54,16 +58,19 @@ prepare_osx: clean_osx
 	cp -a $(NAME)/application.ini $(NAME)/chrome $(NAME)/chrome.manifest $(NAME)/defaults $(OSX)/Resources
 
 build_osx: prepare_osx
-	zip -rqy $(zip_file_osx) $(NAME).app -x '**/.DS_Store' '**/prefs-firefox.js'
+	zip -rqy $(zip_file_osx) $(NAME).app -x '**/.DS_Store'
 
 build_win:
-	zip -rq $(zip_file_win) $(NAME) -x '**/.DS_Store' '**/prefs-firefox.js'
+	zip -rq $(zip_file_win) $(NAME) -x '**/.DS_Store'
 
 build_linux:
-	zip -rq $(zip_file_linux) $(NAME) -x '*/xulrunner/**' '*.exe' '*.dll' '**/.DS_Store' '**/prefs-firefox.js'
+	zip -rq $(zip_file_linux) $(NAME) -x '*/xulrunner/**' '*.exe' '*.dll' '**/.DS_Store'
 	
 xpi:
+	# Use Firefox preferences to make XPI
+	ln -f $(preferences_firefox) $(preferences)
 	cd ElasticWolf && zip -rq ../$(build_dir)/$(xpi_file) . -x $(files_to_exclude_from_xpi)
+	ln -f $(preferences_xulrunner) $(preferences)
 
 # Install Firefox extension by copying XPI file to Firefox profile
 install: xpi
@@ -76,6 +83,7 @@ clean: clean_osx
 	rm -rf *.zip *.xpi ../$(NAME)-*.zip ../$(NAME)-*.xpi -x '**.DS_Store'
 	rm -rf $(build_dir)
 	mkdir -p $(build_dir)
+	ln -f $(preferences_xulrunner) $(preferences)
 
 clean_osx:
 	rm -rf $(OSX)/Resources/chrome $(OSX)/Resources/application.ini $(OSX)/Resources/defaults $(OSX)/Resources/chrome.manifest

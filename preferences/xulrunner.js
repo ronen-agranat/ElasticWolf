@@ -1,3 +1,4 @@
+// Preferences for XULRunner
 pref("toolkit.defaultChromeURI", "chrome://ew/content/ew_window.xul");
 pref("signon.rememberSignons", true);
 pref("signon.expireMasterPassword", false);
